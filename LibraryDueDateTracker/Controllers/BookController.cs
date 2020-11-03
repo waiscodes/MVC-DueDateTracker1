@@ -39,8 +39,15 @@ namespace LibraryDueDateTracker.Controllers
             return View();
         }
 
-        public IActionResult Details()
+        public IActionResult Details(int id)
         {
+            //if (id.HasValue())
+            //{
+            //    return View();
+            //}
+            //{
+                //ViewBag.NoDetails = "Sorry mate, no book ID was passed in";
+            //}
             return View();
         }
 
@@ -58,8 +65,10 @@ namespace LibraryDueDateTracker.Controllers
             }
         }
 
-        public void GetBookById(int id)
+        public Book GetBookById(int id)
         {
+            Book bookFound = Books.Where(x => x.ID == id).SingleOrDefault();
+            return bookFound;
         }
         public void ExtendDueDateForBookByID(int id)
         {
@@ -69,6 +78,7 @@ namespace LibraryDueDateTracker.Controllers
         }
         public void DeleteBookByID(int id)
         {
+            Books.Remove(GetBookById(id));
         }
 
 
