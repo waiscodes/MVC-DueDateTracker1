@@ -1,9 +1,8 @@
-﻿@(ViewBag.bookSelected.Title)
-@(ViewBag.bookSelected.Author)
-@(ViewBag.bookSelected.PublicationDate)
-@(ViewBag.bookSelected.CheckOutDate)
+﻿<p>
+    You checked out this @(ViewBag.bookSelected.Title) on @(ViewBag.bookSelected.CheckOutDate) and it is due back on @(ViewBag.bookSelected.DueDate)
+</p>
 
-<a href="/Book/Edit/">Extend Due Date</a>
-<a href="/Book/Edit/?id=@(ViewBag.bookSelected.Id)"></a>
-<button>delete book</button>
+<a href="/Book/Extend/?id=@(ViewBag.bookSelected.ID)">Extend</a>
+<a href="/Book/Return/?id=@(ViewBag.bookSelected.ID)">Return</a>
+<a href="/Book/Delete/?id=@(ViewBag.bookSelected.ID)">Delete</a>
 

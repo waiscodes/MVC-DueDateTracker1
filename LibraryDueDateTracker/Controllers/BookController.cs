@@ -14,7 +14,7 @@ namespace LibraryDueDateTracker.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("List");
         }
 
         public static List<Book> Books = new List<Book>();
@@ -43,6 +43,22 @@ namespace LibraryDueDateTracker.Controllers
         {
             ViewBag.bookSelected = GetBookById(id);
             return View();
+        }
+
+        public IActionResult Return(int id)
+        {
+            ExtendDueDateForBookByID(id);
+            return RedirectToAction("List");
+        }
+        public IActionResult Extend(int id)
+        {
+            ReturnBookByID(id);
+            return RedirectToAction("List");
+        }
+        public IActionResult Delete(int id)
+        {
+            DeleteBookByID(id);
+            return RedirectToAction("List");
         }
 
         public void CreateBook(int id, string title, string author, DateTime publicationDate, DateTime checkoutDate)
