@@ -17,6 +17,8 @@ namespace LibraryDueDateTracker.Controllers
             return View();
         }
 
+        public static List<Book> Books = new List<Book>();
+
         public IActionResult Create(int id, string title, string author, DateTime publicationDate, DateTime checkoutDate)
         {
             try
@@ -70,6 +72,5 @@ namespace LibraryDueDateTracker.Controllers
         }
 
 
-        public static List<Book> Books = new List<Book>();
     }
 }
