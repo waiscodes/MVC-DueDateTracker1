@@ -1,0 +1,9 @@
+﻿@(ViewBag.bookSelected.Title)
+@(ViewBag.bookSelected.Author)
+@(ViewBag.bookSelected.PublicationDate)
+@(ViewBag.bookSelected.CheckOutDate)
+
+<a href="/Book/Edit/">Extend Due Date</a>
+<a href="/Book/Edit/?id=@(ViewBag.bookSelected.Id)"></a>
+<button>delete book</button>
+

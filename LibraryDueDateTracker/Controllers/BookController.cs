@@ -24,11 +24,11 @@ namespace LibraryDueDateTracker.Controllers
             try
             {
                 CreateBook(id, title.Trim(), author.Trim(), publicationDate, checkoutDate);
-                ViewBag.Success = "Book successfully added";
+                ViewBag.Msg = "Book successfully added";
             }
             catch (Exception e)
             {
-                ViewBag.Fail = e.Message;
+                ViewBag.Msg = e.Message;
             }
             return View();
         }
@@ -41,21 +41,15 @@ namespace LibraryDueDateTracker.Controllers
 
         public IActionResult Details(int id)
         {
-            //if (id.HasValue())
-            //{
-            //    return View();
-            //}
-            //{
-                //ViewBag.NoDetails = "Sorry mate, no book ID was passed in";
-            //}
+            ViewBag.bookSelected = GetBookById(id);
             return View();
         }
 
         public void CreateBook(int id, string title, string author, DateTime publicationDate, DateTime checkoutDate)
         {
-            string anyIds = Books.Where(x => x.ID == id).ToString();
+            List<Book> anyIds = Books.Where(x => x.ID == id).ToList();
 
-            if (anyIds.Any())
+            if (!anyIds.Any())
             {
                 Books.Add(new Book(id, title, author, publicationDate, checkoutDate));
             }
@@ -72,15 +66,19 @@ namespace LibraryDueDateTracker.Controllers
         }
         public void ExtendDueDateForBookByID(int id)
         {
+            DateTime newdueDate = DateTime.Now.AddDays(7);
+            Book book = Books.Where(x => x.ID == id).Single();
+            book.DueDate = newdueDate;
         }
         public void ReturnBookByID(int id)
         {
+            DateTime todaysDate = DateTime.Now;
+            Book book = Books.Where(x => x.ID == id).Single();
+            book.ReturnDate = todaysDate;
         }
         public void DeleteBookByID(int id)
         {
             Books.Remove(GetBookById(id));
         }
-
-
     }
 }
