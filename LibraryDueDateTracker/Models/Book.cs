@@ -20,7 +20,7 @@ namespace LibraryDueDateTracker.Models
             PublicationDate = publicationDate;
             CheckOutDate = checkoutDate;
 
-            //DueDate = DateTime + 14;
+            DueDate = CheckOutDate.AddDays(14);
             ReturnDate = null;
         }
     }
